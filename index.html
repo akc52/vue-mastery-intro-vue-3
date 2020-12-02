@@ -10,6 +10,8 @@
   </head>
   <body>
     <div id="app">
+      <div class="nav-bar"></div>
+      <div class="cart">Cart ({{cart}})</div>
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
@@ -20,8 +22,10 @@
             <p v-if="inventory > 10">In Stock</p>
             <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
             <p v-else>Out of Stock</p>
+            <button class="button" v-on:click="addToCart">Add to Cart</button>
+            <button v-if="cart > 0" class="button" v-on:click="removeFromCart">Remove One</button>
             <p>{{ description }}</p>
-            <div v-for="variant in variants" v-bind:key="variant.id">{{ variant.color }}</div>
+            <div v-for="variant in variants" v-bind:key="variant.id" @mouseover="updateImage(variant.image)">{{ variant.color }}</div>
             <figure>
               <figcaption>Details:</figcaption>
               <ul>
