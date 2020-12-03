@@ -5,6 +5,8 @@ const app = Vue.createApp({
             product: 'Socks',
             description: 'Sold in non-smelly option',
             image: './assets/images/socks_green.jpg',
+            activeClass: true,
+            inStock: false,
             inventory: 9,
             url: 'https://www.google.ca',
             details: ['50% cotton', '30% wool', '20% polyester'],
