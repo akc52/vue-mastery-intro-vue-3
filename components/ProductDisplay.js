@@ -30,10 +30,9 @@ app.component('product-display', {
                 Add to Cart
             </button>
             <button 
-            v-if="cart > 0" 
             class="button" 
-            v-on:click="removeFromCart">
-                Remove One
+            v-on:click="removeById">
+                Remove
             </button>
             <div 
             v-for="(variant, index) in variants" 
@@ -47,7 +46,7 @@ app.component('product-display', {
   </div>`,
   data() {
     return {
-        cart: 0,
+        cart: [],
         product: 'Socks',
         description: 'Sold in non-smelly option',
         selectedVariant: 0,
@@ -58,17 +57,19 @@ app.component('product-display', {
         details: ['50% cotton', '30% wool', '20% polyester'],
         variants: [
             { id:2234, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 50 },
-            { id:2235, color: 'green', image: './assets/images/socks_green.jpg', quantity: 0 }
+            { id:2235, color: 'green', image: './assets/images/socks_green.jpg', quantity: 10 }
         ],
         sizes: [ 'small', 'large', 'extra-large' ]
     }
     },
     methods: {
         addToCart() {
-            this.cart += 1
+            //this.cart += 1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
         },
-        removeFromCart() {
-            this.cart -= 1
+        removeById(id) {
+            //this.cart -= 1
+            this.$emit('remove-by-id', this.variants[this.selectedVariant].id)
         },
         updateVariant(index) {
             this.selectedVariant = index
