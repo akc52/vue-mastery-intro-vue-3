@@ -42,6 +42,8 @@ app.component('product-display', {
             :class="{ active: activeClass }"
             :style="{backgroundColor: variant.color }"></div>
         </div>
+        <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+        <review-form @review-submitted="addReview"></review-form>
     </div>
   </div>`,
   data() {
@@ -59,6 +61,7 @@ app.component('product-display', {
             { id:2234, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 50 },
             { id:2235, color: 'green', image: './assets/images/socks_green.jpg', quantity: 10 }
         ],
+        reviews: [],
         sizes: [ 'small', 'large', 'extra-large' ]
     }
     },
@@ -73,6 +76,9 @@ app.component('product-display', {
         },
         updateVariant(index) {
             this.selectedVariant = index
+        },
+        addReview(review){
+            this.reviews.push(review)
         }
     },
     computed: {
